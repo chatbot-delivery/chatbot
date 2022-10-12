@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# ChoiceInput_Prompt_yZLnro()
+[Activity
+    Text = ${ChoiceInput_Prompt_yZLnro_text()}
+]
+
+# ChoiceInput_Prompt_yZLnro_text()
+- Please select Retail Shop location
+# SendActivity_GPH6zu()
+[Activity
+    Text = ${SendActivity_GPH6zu_text()}
+]
+
+# SendActivity_GPH6zu_text()
+- Thanks for selecting ${user.deliveryaddress} as your retail shop location for package with Tracking No ${conversation.trackingnumber}

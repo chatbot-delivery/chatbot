@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.LuisRecognizer",
+  "id": "LUIS_AddDriverInstructionsDialog",
+  "applicationId": "=settings.luis.AddDriverInstructionsDialog_en_us_lu.appId",
+  "version": "=settings.luis.AddDriverInstructionsDialog_en_us_lu.version",
+  "endpoint": "=settings.luis.endpoint",
+  "endpointKey": "=settings.luis.endpointKey"
+}

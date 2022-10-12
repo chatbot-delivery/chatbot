@@ -1,0 +1,121 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "864790",
+    "description": "",
+    "name": "WhatsAppDeliveryChatBotRootDialog"
+  },
+  "autoEndDialog": false,
+  "defaultResultProperty": "dialog.result",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": [
+      {
+        "intent": "ManageDelivery",
+        "pattern": "[a-zA-Z0-9]{10}"
+      }
+    ]
+  },
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "4Tq5FX",
+        "name": "ManageDelivery",
+        "comment": "whatsappchatbot-content-service.azurewebsites.net"
+      },
+      "intent": "ManageDelivery",
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "1sdjcF"
+          },
+          "activity": "${SendActivity_1sdjcF()}",
+          "disabled": true
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "szOw9N",
+            "comment": "https://whatsappchatbot-content-service.azurewebsites.net"
+          },
+          "assignments": [
+            {
+              "property": "conversation.trackingId",
+              "value": "${substring(turn.recognized.text, 0,10)}"
+            },
+            {
+              "property": "conversation.contentServiceHost",
+              "value": "https://whatsappchatbot-content-service.azurewebsites.net"
+            },
+            {
+              "property": "conversation.locale",
+              "value": "=turn.activity.locale"
+            },
+            {
+              "property": "conversation.p4eBackendHost",
+              "value": "https://p4ebackend.azurewebsites.net"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "3e3Hpr"
+          },
+          "condition": "conversation.locale",
+          "cases": [
+            {
+              "value": "nl-NL",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SetProperty",
+                  "$designer": {
+                    "id": "SiE88a"
+                  },
+                  "property": "conversation.language",
+                  "value": "nl"
+                }
+              ]
+            },
+            {
+              "actions": [
+                {
+                  "$kind": "Microsoft.SetProperty",
+                  "$designer": {
+                    "id": "xY8iVG"
+                  },
+                  "property": "conversation.language",
+                  "value": "en"
+                }
+              ],
+              "value": "en-US"
+            }
+          ],
+          "default": [
+            {
+              "$kind": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "uy7ZhH"
+              },
+              "property": "conversation.language",
+              "value": "en"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "F7xEiu"
+          },
+          "activityProcessed": true,
+          "dialog": "httpTestDialog"
+        }
+      ]
+    }
+  ],
+  "generator": "controllingconversationflowsample.lg",
+  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",
+  "id": "WhatsAppChatBot"
+}

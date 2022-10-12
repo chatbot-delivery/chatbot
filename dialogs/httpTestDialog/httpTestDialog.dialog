@@ -1,0 +1,210 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "isuoSJ",
+    "name": "ManageDeliveryOptionsDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "RfN916"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "PMCuHF"
+          },
+          "resultProperty": "dialog.api_response1",
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs/deliveryoptions?language=${conversation.language}",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "JX7mnu"
+          },
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs?language=${conversation.language}&dialogId=delivery_options",
+          "resultProperty": "dialog.api_response2",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "qM06Nx"
+          },
+          "condition": "dialog.api_response2.statusCode == 200",
+          "actions": [
+            {
+              "$kind": "Microsoft.SetProperties",
+              "$designer": {
+                "id": "eWjxF4"
+              },
+              "assignments": [
+                {
+                  "value": "=dialog.api_response2.content[0].dialogName",
+                  "property": "conversation.deliveryOptionText"
+                },
+                {
+                  "property": "conversation.deliveryOptions",
+                  "value": "=dialog.api_response1.content"
+                }
+              ]
+            },
+            {
+              "$kind": "Microsoft.ChoiceInput",
+              "$designer": {
+                "id": "zb6GW5"
+              },
+              "defaultLocale": "en-us",
+              "disabled": false,
+              "maxTurnCount": 3,
+              "alwaysPrompt": true,
+              "allowInterruptions": false,
+              "unrecognizedPrompt": "",
+              "invalidPrompt": "",
+              "prompt": "${ChoiceInput_Prompt_zb6GW5()}",
+              "property": "conversation.selectedDeliveryOption",
+              "recognizerOptions": {
+                "recognizeOrdinals": true,
+                "recognizeNumbers": true
+              },
+              "outputFormat": "index",
+              "choiceOptions": {
+                "includeNumbers": true,
+                "inlineOrMore": ", or ",
+                "inlineSeparator": ",",
+                "inlineOr": " or "
+              },
+              "style": "inline",
+              "choices": "=conversation.deliveryOptions"
+            },
+            {
+              "$kind": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "R9114G"
+              },
+              "value": "=add(conversation.selectedDeliveryOption,1)",
+              "property": "conversation.selectedDeliveryOption"
+            },
+            {
+              "$kind": "Microsoft.SwitchCondition",
+              "$designer": {
+                "id": "4p3bu4"
+              },
+              "condition": "conversation.selectedDeliveryOption",
+              "cases": [
+                {
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.BeginDialog",
+                      "$designer": {
+                        "id": "NYZWMp"
+                      },
+                      "activityProcessed": true,
+                      "dialog": "ChangeDeliveryDateDialog"
+                    }
+                  ],
+                  "value": "1"
+                },
+                {
+                  "value": "2",
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.BeginDialog",
+                      "$designer": {
+                        "id": "Hvlgvm"
+                      },
+                      "activityProcessed": true,
+                      "dialog": "DeliverToPickupPointDialog"
+                    }
+                  ]
+                },
+                {
+                  "value": "3",
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.BeginDialog",
+                      "$designer": {
+                        "id": "uNSPmM"
+                      },
+                      "activityProcessed": true,
+                      "dialog": "DeliverToSecurePlaceDialog"
+                    }
+                  ]
+                },
+                {
+                  "value": "4",
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.BeginDialog",
+                      "$designer": {
+                        "id": "eKJmd1"
+                      },
+                      "activityProcessed": true,
+                      "dialog": "DeliverToNeighbourDialog"
+                    }
+                  ]
+                },
+                {
+                  "value": "5",
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.BeginDialog",
+                      "$designer": {
+                        "id": "VsN4GL"
+                      },
+                      "activityProcessed": true,
+                      "dialog": "DeliveryToDifferentAddressDialog"
+                    }
+                  ]
+                },
+                {
+                  "value": "6",
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.BeginDialog",
+                      "$designer": {
+                        "id": "T1eTG2"
+                      },
+                      "activityProcessed": true,
+                      "dialog": "AddDriverInstructionsDialog"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "1e2Idx"
+              },
+              "activity": "${SendActivity_1e2Idx()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "ZwfEER"
+          }
+        }
+      ]
+    }
+  ],
+  "generator": "httpTestDialog.lg",
+  "recognizer": "httpTestDialog.lu.qna",
+  "id": "httpTestDialog"
+}

@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# SendActivity_IkAumB()
+[Activity
+    Text = ${SendActivity_IkAumB_text()}
+]
+
+# SendActivity_IkAumB_text()
+- Thanks. The package with Tracking No ${conversation.trackingnumber} will be left with Neighbor.
+# ChoiceInput_Prompt_gGf3W8()
+[Activity
+    Text = ${ChoiceInput_Prompt_gGf3W8_text()}
+]
+
+# ChoiceInput_Prompt_gGf3W8_text()
+- Please confirm the address by replying back with the below options

@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# SendActivity_1e2Idx()
+[Activity
+    Text = ${SendActivity_1e2Idx_text()}
+]
+
+# SendActivity_1e2Idx_text()
+- Techical error 100: Please get in touch with administrator
+# ChoiceInput_Prompt_zb6GW5()
+[Activity
+    Text = ${ChoiceInput_Prompt_zb6GW5_text()}
+]
+
+# ChoiceInput_Prompt_zb6GW5_text()
+- ${conversation.deliveryOptionText}

@@ -1,0 +1,97 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "6jK6mI",
+    "name": "DeliverToPickupPointDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "hv9n1u"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "kgW48K"
+          },
+          "resultProperty": "conversation.pickupPoints",
+          "method": "GET",
+          "url": "${conversation.p4eBackendHost}/v1/pickuppoints?trackingId=${conversation.trackingId}&language=${conversation.language}",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "BDZip4"
+          },
+          "resultProperty": "conversation.deliveryToPickupPointContent",
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs?language=${conversation.language}&dialogId=deliver_to_pickup_point",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "APDytA"
+          },
+          "assignments": [
+            {
+              "property": "conversation.deliveryToPickupPointText1",
+              "value": "=conversation.deliveryToPickupPointContent.content[0].dialogTexts[0].dialogText"
+            },
+            {
+              "property": "conversation.deliveryToPickupPointText2",
+              "value": "=conversation.deliveryToPickupPointContent.content[0].dialogTexts[1].dialogText"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "rsk8Rj"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${ChoiceInput_Prompt_rsk8Rj()}",
+          "property": "conversation.selectedPickupPoint",
+          "outputFormat": "index",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "style": "inline",
+          "choices": "=conversation.pickupPoints.content",
+          "recognizerOptions": {
+            "recognizeOrdinals": true
+          }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "uQRTAN"
+          },
+          "activity": "${SendActivity_uQRTAN()}"
+        }
+      ]
+    }
+  ],
+  "generator": "DeliverToPickupPointDialog.lg",
+  "recognizer": "DeliverToPickupPointDialog.lu.qna",
+  "id": "DeliverToPickupPointDialog"
+}

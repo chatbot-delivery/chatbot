@@ -1,0 +1,115 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "QFzRex",
+    "name": "ChangeDeliveryDateDialog",
+    "comment": "This dialog gives the user option to change delivery date."
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "xM7oh5"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "1j4yiV"
+          },
+          "method": "GET",
+          "url": "${conversation.p4eBackendHost}/v1/deliverydates?trackingId=${conversation.trackingId}&language=${conversation.language}",
+          "resultProperty": "dialog.api_response1",
+          "responseType": "json",
+          "contentType": "application/json"
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "9RD73X"
+          },
+          "assignments": [
+            {
+              "property": "conversation.alternateDeliveryDates",
+              "value": "=dialog.api_response1.content"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "wTRVgS"
+          },
+          "resultProperty": "dialog.api_response2",
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs?language=${conversation.language}&dialogId=change_delivery_date",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "2QBbrA"
+          },
+          "assignments": [
+            {
+              "property": "conversation.changeDeliveryDateText1",
+              "value": "=dialog.api_response2.content[0].dialogTexts[1].dialogText"
+            },
+            {
+              "value": "=dialog.api_response2.content[0].dialogTexts[2].dialogText",
+              "property": "conversation.changeDeliveryDateText2"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "KfyKBC"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${ChoiceInput_Prompt_KfyKBC()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineSeparator": ",",
+            "inlineOrMore": ", or ",
+            "inlineOr": " or "
+          },
+          "property": "conversation.deliveryDate",
+          "outputFormat": "index",
+          "style": "inline",
+          "choices": "=conversation.alternateDeliveryDates"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "ttB7dW"
+          },
+          "property": "conversation.deliveryDate",
+          "value": "=add(conversation.deliveryDate, 1)"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "Aa1WUR"
+          },
+          "activity": "${SendActivity_Aa1WUR()}"
+        }
+      ]
+    }
+  ],
+  "generator": "ChangeDeliveryDateDialog.lg",
+  "recognizer": "ChangeDeliveryDateDialog.lu.qna",
+  "id": "ChangeDeliveryDateDialog"
+}

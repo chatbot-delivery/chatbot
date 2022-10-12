@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# SendActivity_Aa1WUR()
+[Activity
+    Text = ${SendActivity_Aa1WUR_text()}
+]
+
+# SendActivity_Aa1WUR_text()
+- ${conversation.changeDeliveryDateText2}
+# ChoiceInput_Prompt_KfyKBC()
+[Activity
+    Text = ${ChoiceInput_Prompt_KfyKBC_text()}
+]
+
+# ChoiceInput_Prompt_KfyKBC_text()
+- ${conversation.changeDeliveryDateText1}

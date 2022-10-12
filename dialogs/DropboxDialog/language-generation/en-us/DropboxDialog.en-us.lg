@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# ChoiceInput_Prompt_xxT6ye()
+[Activity
+    Text = ${ChoiceInput_Prompt_xxT6ye_text()}
+]
+
+# SendActivity_0HgLio()
+[Activity
+    Text = ${SendActivity_0HgLio_text()}
+]
+
+# SendActivity_0HgLio_text()
+- Thanks for selecting ${user.deliveryaddress} as your drop location for package with Tracking No ${conversation.trackingnumber}
+# ChoiceInput_Prompt_xxT6ye_text()
+- Please select dropbox location

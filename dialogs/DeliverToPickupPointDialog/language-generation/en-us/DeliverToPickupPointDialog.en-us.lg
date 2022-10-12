@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# ChoiceInput_Prompt_rsk8Rj()
+[Activity
+    Text = ${ChoiceInput_Prompt_rsk8Rj_text()}
+]
+
+# ChoiceInput_Prompt_rsk8Rj_text()
+- ${conversation.deliveryToPickupPointText1}
+# SendActivity_uQRTAN()
+[Activity
+    Text = ${SendActivity_uQRTAN_text()}
+]
+
+# SendActivity_uQRTAN_text()
+- ${conversation.deliveryToPickupPointText2}

@@ -1,0 +1,59 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "l01RHE",
+    "name": "ChangeDropboxDialog",
+    "comment": "Dialog when user select delivery location as Dropbox"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "FClmCT"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "xxT6ye"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          },
+          "prompt": "${ChoiceInput_Prompt_xxT6ye()}",
+          "property": "user.deliveryaddress",
+          "choices": "=user.dropboxlocations",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "style": "inline"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "0HgLio"
+          },
+          "activity": "${SendActivity_0HgLio()}"
+        }
+      ]
+    }
+  ],
+  "generator": "DropboxDialog.lg",
+  "recognizer": "DropboxDialog.lu.qna",
+  "id": "ChangeDropboxDialog"
+}

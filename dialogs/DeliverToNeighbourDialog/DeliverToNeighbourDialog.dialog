@@ -1,0 +1,73 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "HuI3vs",
+    "name": "DeliverToNeighbourDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "OEQcIg"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "IOwBfd"
+          },
+          "resultProperty": "conversation.deliveryToNeighbourInstructionsContent",
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs?language=${conversation.language}&dialogId=deliver_to_neighbour",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "pRgI6h"
+          },
+          "assignments": [
+            {
+              "property": "conversation.deliveryToNeighbourText1",
+              "value": "=conversation.deliveryToNeighbourInstructionsContent.content[0].dialogTexts[0].dialogText"
+            },
+            {
+              "value": "=conversation.deliveryToNeighbourInstructionsContent.content[0].dialogTexts[1].dialogText",
+              "property": "conversation.deliveryToNeighbourText2"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "q6Eqni"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${TextInput_Prompt_q6Eqni()}",
+          "property": "conversation.deliveryToNeighbourInstructions"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "5it1HL"
+          },
+          "activity": "${SendActivity_5it1HL()}"
+        }
+      ]
+    }
+  ],
+  "generator": "DeliverToNeighbourDialog.lg",
+  "recognizer": "DeliverToNeighbourDialog.lu.qna",
+  "id": "DeliverToNeighbourDialog"
+}

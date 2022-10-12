@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# SendActivity_5KNEco()
+[Activity
+    Text = ${SendActivity_5KNEco_text()}
+]
+
+# SendActivity_5KNEco_text()
+- ${conversation.deliveryToDifferentAddressText2}
+# ChoiceInput_Prompt_7set6G()
+[Activity
+    Text = ${ChoiceInput_Prompt_7set6G_text()}
+]
+
+# ChoiceInput_Prompt_7set6G_text()
+- ${conversation.deliveryToDifferentAddressText1}

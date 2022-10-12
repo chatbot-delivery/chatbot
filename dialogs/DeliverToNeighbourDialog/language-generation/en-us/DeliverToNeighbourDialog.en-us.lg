@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# TextInput_Prompt_q6Eqni()
+[Activity
+    Text = ${TextInput_Prompt_q6Eqni_text()}
+]
+
+# TextInput_Prompt_q6Eqni_text()
+- ${conversation.deliveryToNeighbourText1}
+# SendActivity_5it1HL()
+[Activity
+    Text = ${SendActivity_5it1HL_text()}
+]
+
+# SendActivity_5it1HL_text()
+- ${conversation.deliveryToNeighbourText2}

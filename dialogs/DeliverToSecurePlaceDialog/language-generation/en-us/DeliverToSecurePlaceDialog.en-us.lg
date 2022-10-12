@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# TextInput_Prompt_mA26r9()
+[Activity
+    Text = ${TextInput_Prompt_mA26r9_text()}
+]
+
+# TextInput_Prompt_mA26r9_text()
+- ${conversation.deliveryToSecurePlaceText1}
+# SendActivity_mfyw6a()
+[Activity
+    Text = ${SendActivity_mfyw6a_text()}
+]
+
+# SendActivity_mfyw6a_text()
+- ${conversation.deliveryToSecurePlaceText2}

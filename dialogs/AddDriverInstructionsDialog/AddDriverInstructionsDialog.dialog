@@ -1,0 +1,74 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "IgHt87",
+    "name": "AddDriverInstructionsDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "FMVKyB"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "jZPvGP"
+          },
+          "resultProperty": "conversation.addDriverInstructionsContent",
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs?language=${conversation.language}&dialogId=add_driver_instructions",
+          "contentType": "application/json",
+          "responseType": "json",
+          "headers": {}
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "ajKcjj"
+          },
+          "assignments": [
+            {
+              "property": "conversation.addDriverInstructionsText1",
+              "value": "=conversation.addDriverInstructionsContent.content[0].dialogTexts[0].dialogText"
+            },
+            {
+              "property": "conversation.addDriverInstructionsText2",
+              "value": "=conversation.addDriverInstructionsContent.content[0].dialogTexts[1].dialogText"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "MkYFbF"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_MkYFbF()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "property": "conversation.addDriverInstructions"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "zUJKQJ"
+          },
+          "activity": "${SendActivity_zUJKQJ()}"
+        }
+      ]
+    }
+  ],
+  "generator": "AddDriverInstructionsDialog.lg",
+  "recognizer": "AddDriverInstructionsDialog.lu.qna",
+  "id": "AddDriverInstructionsDialog"
+}

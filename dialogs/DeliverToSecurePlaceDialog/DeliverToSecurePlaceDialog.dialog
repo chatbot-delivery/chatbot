@@ -1,0 +1,73 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "gZtejl",
+    "name": "DeliverToSecurePlaceDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "s3D5oW"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "YH2KQq"
+          },
+          "resultProperty": "conversation.deliverToSecurePlaceContent",
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs?language=${conversation.language}&dialogId=leave_package_at_secure_place",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "CLkd3N"
+          },
+          "assignments": [
+            {
+              "value": "=conversation.deliverToSecurePlaceContent.content[0].dialogTexts[0].dialogText",
+              "property": "conversation.deliveryToSecurePlaceText1"
+            },
+            {
+              "property": "conversation.deliveryToSecurePlaceText2",
+              "value": "=conversation.deliverToSecurePlaceContent.content[0].dialogTexts[1].dialogText"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "mA26r9"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${TextInput_Prompt_mA26r9()}",
+          "property": "conversation.deliveryToSecurePlaceInstructions"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "mfyw6a"
+          },
+          "activity": "${SendActivity_mfyw6a()}"
+        }
+      ]
+    }
+  ],
+  "generator": "DeliverToSecurePlaceDialog.lg",
+  "recognizer": "DeliverToSecurePlaceDialog.lu.qna",
+  "id": "DeliverToSecurePlaceDialog"
+}

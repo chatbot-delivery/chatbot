@@ -1,0 +1,10 @@
+[import](common.lg)
+
+
+# SendActivity_1sdjcF()
+[Activity
+    Text = ${SendActivity_1sdjcF_text()}
+]
+
+# SendActivity_1sdjcF_text()
+- ${substring(turn.recognized.text, 0,10)} this is ur no input

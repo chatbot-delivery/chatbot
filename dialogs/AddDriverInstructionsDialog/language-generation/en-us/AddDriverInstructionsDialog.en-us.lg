@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# TextInput_Prompt_MkYFbF()
+[Activity
+    Text = ${TextInput_Prompt_MkYFbF_text()}
+]
+
+# TextInput_Prompt_MkYFbF_text()
+- ${conversation.addDriverInstructionsText1}
+# SendActivity_zUJKQJ()
+[Activity
+    Text = ${SendActivity_zUJKQJ_text()}
+]
+
+# SendActivity_zUJKQJ_text()
+- ${conversation.addDriverInstructionsText2}

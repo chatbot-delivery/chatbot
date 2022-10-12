@@ -1,0 +1,97 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "HOtzWy",
+    "name": "DeliveryToDifferentAddressDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "U6fwkQ"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "QMJucx"
+          },
+          "resultProperty": "conversation.alternateDeliveryAddresses",
+          "method": "GET",
+          "url": "${conversation.p4eBackendHost}/v1/alternateDeliveryAddresses?trackingId=${conversation.trackingId}&language=${conversation.language}",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "gZrFqo"
+          },
+          "resultProperty": "conversation.deliveryToDifferentAddressContent",
+          "method": "GET",
+          "url": "${conversation.contentServiceHost}/dialogs?language=${conversation.language}&dialogId=deliver_to_different_address",
+          "contentType": "application/json",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "QmZyxq"
+          },
+          "assignments": [
+            {
+              "property": "conversation.deliveryToDifferentAddressText1",
+              "value": "=conversation.deliveryToDifferentAddressContent.content[0].dialogTexts[0].dialogText"
+            },
+            {
+              "property": "conversation.deliveryToDifferentAddressText2",
+              "value": "=conversation.deliveryToDifferentAddressContent.content[0].dialogTexts[1].dialogText"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "7set6G"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "prompt": "${ChoiceInput_Prompt_7set6G()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineSeparator": ",",
+            "inlineOr": " or "
+          },
+          "property": "conversation.selectedAlternateDeliveryAddress",
+          "style": "inline",
+          "choices": "=conversation.alternateDeliveryAddresses.content",
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "5KNEco"
+          },
+          "activity": "${SendActivity_5KNEco()}"
+        }
+      ]
+    }
+  ],
+  "generator": "DeliveryToDifferentAddressDialog.lg",
+  "recognizer": "DeliveryToDifferentAddressDialog.lu.qna",
+  "id": "DeliveryToDifferentAddressDialog"
+}

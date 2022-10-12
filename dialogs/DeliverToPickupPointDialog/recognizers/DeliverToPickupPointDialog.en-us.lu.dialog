@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.LuisRecognizer",
+  "id": "LUIS_DeliverToPickupPointDialog",
+  "applicationId": "=settings.luis.DeliverToPickupPointDialog_en_us_lu.appId",
+  "version": "=settings.luis.DeliverToPickupPointDialog_en_us_lu.version",
+  "endpoint": "=settings.luis.endpoint",
+  "endpointKey": "=settings.luis.endpointKey"
+}

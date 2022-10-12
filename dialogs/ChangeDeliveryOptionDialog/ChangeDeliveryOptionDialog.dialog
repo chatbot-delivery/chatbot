@@ -1,0 +1,117 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "5PsG3F",
+    "name": "ChangeDeliveryLocationDialog",
+    "comment": "Dialog to present delivery options to the user"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "99Ue8T"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "PAk9b7"
+          },
+          "property": "conversation.trackingnumber",
+          "value": "=conversation.track"
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "gGf3W8"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "property": "user.deliverylocation",
+          "choices": [
+            "Neighbor",
+            "Retail Shop",
+            "Dropbox"
+          ],
+          "prompt": "${ChoiceInput_Prompt_gGf3W8()}",
+          "style": "inline",
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "fAkogb"
+          },
+          "condition": "user.deliverylocation",
+          "cases": [
+            {
+              "value": "Neighbor",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "IkAumB"
+                  },
+                  "activity": "${SendActivity_IkAumB()}"
+                }
+              ]
+            },
+            {
+              "value": "Retail Shop",
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "vQqDhi"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "StoreDialog"
+                }
+              ]
+            },
+            {
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "qv2Ytw"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "DropboxDialog"
+                },
+                {
+                  "$kind": "Microsoft.EndDialog",
+                  "$designer": {
+                    "id": "GF9fmT"
+                  }
+                }
+              ],
+              "value": "Dropbox"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "ChangeDeliveryOptionDialog.lg",
+  "recognizer": "ChangeDeliveryOptionDialog.lu.qna",
+  "id": "ChangeDeliveryOptionDialog"
+}
