@@ -22,7 +22,7 @@
       "$designer": {
         "id": "4Tq5FX",
         "name": "ManageDelivery",
-        "comment": "whatsappchatbot-content-service.azurewebsites.net"
+        "comment": "chatbot-content-service.azurewebsites.net"
       },
       "intent": "ManageDelivery",
       "actions": [
@@ -38,7 +38,7 @@
           "$kind": "Microsoft.SetProperties",
           "$designer": {
             "id": "szOw9N",
-            "comment": "https://whatsappchatbot-content-service.azurewebsites.net"
+            "comment": "https://chatbot-content-service.azurewebsites.net"
           },
           "assignments": [
             {
@@ -47,7 +47,7 @@
             },
             {
               "property": "conversation.contentServiceHost",
-              "value": "https://whatsappchatbot-content-service.azurewebsites.net"
+              "value": "https://chatbot-content-service.azurewebsites.net"
             },
             {
               "property": "conversation.locale",
