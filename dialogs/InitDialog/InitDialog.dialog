@@ -1,0 +1,94 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "qBJq3W",
+    "name": "InitDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "lgCUQa"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "2yZ618"
+          },
+          "assignments": [
+            {
+              "property": "conversation.trackingId",
+              "value": "${substring(turn.recognized.text, 0,10)}"
+            },
+            {
+              "property": "conversation.contentServiceHost",
+              "value": "http://localhost:8080"
+            },
+            {
+              "property": "conversation.locale",
+              "value": "=turn.activity.locale"
+            },
+            {
+              "property": "conversation.p4eBackendHost",
+              "value": "http://localhost:8081"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "DluETi"
+          },
+          "condition": "conversation.locale",
+          "cases": [
+            {
+              "actions": [
+                {
+                  "$kind": "Microsoft.SetProperty",
+                  "$designer": {
+                    "id": "msuD1x"
+                  },
+                  "property": "conversation.language",
+                  "value": "nl"
+                }
+              ],
+              "value": "nl-NL"
+            },
+            {
+              "value": "en-US",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SetProperty",
+                  "$designer": {
+                    "id": "IvC2Fc"
+                  },
+                  "property": "conversation.language",
+                  "value": "en"
+                }
+              ]
+            }
+          ],
+          "default": [
+            {
+              "$kind": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "VOcBOv"
+              },
+              "property": "conversation.language",
+              "value": "en"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "InitDialog.lg",
+  "recognizer": "InitDialog.lu.qna",
+  "id": "InitDialog"
+}

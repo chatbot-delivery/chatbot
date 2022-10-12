@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "azureBotId": {
+        "value": "fdmideliverychatbot"
+      },
+      "azureBotSku": {
+        "value": "F0"
+      },
+      "azureBotRegion": {
+        "value": "global"
+      },
+      "botEndpoint": {
+        "value": "https://chatbot-delivery.azurewebsites.net/api/messages"
+      },
+      "appType": {
+        "value": "UserAssignedMSI"
+      },
+      "appId": {
+        "value": "873381e6-964f-44b0-b1aa-97907138b3ce"
+      },
+      "UMSIName": {
+        "value": "UMI_deliverybot"
+      },
+      "UMSIResourceGroupName": {
+        "value": "RG-FedExEurope_DeliveryBot"
+      },
+      "tenantId": {
+        "value": ""
+      }
+    }
+  }
