@@ -47,7 +47,7 @@
             },
             {
               "property": "conversation.p4eBackendHost",
-              "value": "https://p4ebackend.azurewebsites.net"
+              "value": "https://chatbot-p4ebackend.azurewebsites.net"
             }
           ]
         },
