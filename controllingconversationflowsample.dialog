@@ -27,18 +27,10 @@
       "intent": "ManageDelivery",
       "actions": [
         {
-          "$kind": "Microsoft.SendActivity",
-          "$designer": {
-            "id": "1sdjcF"
-          },
-          "activity": "${SendActivity_1sdjcF()}",
-          "disabled": true
-        },
-        {
           "$kind": "Microsoft.SetProperties",
           "$designer": {
             "id": "szOw9N",
-            "comment": "https://chatbot-content-service.azurewebsites.net"
+            "comment": "https://chatbot-content-service.azurewebsites.net\n\nhttps://p4ebackend.azurewebsites.net"
           },
           "assignments": [
             {
