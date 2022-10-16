@@ -26,5 +26,16 @@ az monitor app-insights component create --app %APP_INSIGHTS_NAME% --location %L
 
 az webapp config appsettings set --name %APP_SERVICE_NAME% --resource-group %RESOURCE_GROUP_NAME% --settings APPINSIGHTS_INSTRUMENTATIONKEY=a77e9c5a-8e7e-4382-8c0b-66a813861b0c APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=a77e9c5a-8e7e-4382-8c0b-66a813861b0c WEBSITE_NODE_DEFAULT_VERSION=10.14.1 ApplicationInsightsAgent_EXTENSION_VERSION=~2
 
+#### Manual Deploy Code
+npm install (Run this otherwise BOT will show timeout error )
+
+az bot prepare-deploy --lang JavaScript --code-dir "."
+
+zip -r "chatbot-delivery.zip" . 
+
+az webapp deployment source config-zip --resource-group "RG-FedExEurope_DeliveryBot" --name "chatbot-delivery" --src "chatbot-delivery.zip"
+
+az bot update --resource-group "RG-FedExEurope_DeliveryBot" --name fdmideliverychatbot  --endpoint https://chatbot-delivery.azurewebsites.net/api/messages
+
 
 

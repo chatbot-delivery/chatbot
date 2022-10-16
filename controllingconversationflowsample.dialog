@@ -48,51 +48,10 @@
             {
               "property": "conversation.p4eBackendHost",
               "value": "https://chatbot-p4ebackend.azurewebsites.net"
-            }
-          ]
-        },
-        {
-          "$kind": "Microsoft.SwitchCondition",
-          "$designer": {
-            "id": "3e3Hpr"
-          },
-          "condition": "conversation.locale",
-          "cases": [
-            {
-              "value": "nl-NL",
-              "actions": [
-                {
-                  "$kind": "Microsoft.SetProperty",
-                  "$designer": {
-                    "id": "SiE88a"
-                  },
-                  "property": "conversation.language",
-                  "value": "nl"
-                }
-              ]
             },
             {
-              "actions": [
-                {
-                  "$kind": "Microsoft.SetProperty",
-                  "$designer": {
-                    "id": "xY8iVG"
-                  },
-                  "property": "conversation.language",
-                  "value": "en"
-                }
-              ],
-              "value": "en-US"
-            }
-          ],
-          "default": [
-            {
-              "$kind": "Microsoft.SetProperty",
-              "$designer": {
-                "id": "uy7ZhH"
-              },
               "property": "conversation.language",
-              "value": "en"
+              "value": "=turn.activity.locale"
             }
           ]
         },
