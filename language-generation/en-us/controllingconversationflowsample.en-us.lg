@@ -1,10 +1,2 @@
 [import](common.lg)
 
-
-# SendActivity_GN9KdK()
-[Activity
-    Text = ${SendActivity_GN9KdK_text()}
-]
-
-# SendActivity_GN9KdK_text()
-- Locale: ${conversation.locale}, Language: ${conversation.language}

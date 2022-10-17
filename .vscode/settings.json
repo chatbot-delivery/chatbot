@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/8c615542-b27e-450a-aad4-c1ba2e5eaf62/AppServices/subscriptions/8c615542-b27e-450a-aad4-c1ba2e5eaf62/resourceGroups/RG-FedExEurope_DeliveryBot/providers/Microsoft.Web/sites/chatbot-delivery",
+    "appService.deploySubpath": "."
+}

@@ -56,13 +56,6 @@
           ]
         },
         {
-          "$kind": "Microsoft.SendActivity",
-          "$designer": {
-            "id": "GN9KdK"
-          },
-          "activity": "${SendActivity_GN9KdK()}"
-        },
-        {
           "$kind": "Microsoft.BeginDialog",
           "$designer": {
             "id": "F7xEiu"
